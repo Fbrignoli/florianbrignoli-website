@@ -1,0 +1,44 @@
+---
+import { site, pillars } from "../lib/config";
+---
+
+<section id="approche" class="py-24 md:py-32 border-t border-border">
+  <div class="container-wide">
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-5">
+        <p class="eyebrow mb-4">02 · L'approche</p>
+        <h2 class="text-4xl md:text-6xl">
+          <span class="italic text-accent">Trois</span> étapes.
+        </h2>
+      </div>
+      <div class="md:col-span-7 md:pt-10">
+        <p class="text-lg text-ink-secondary">
+          La techno est prête. Reste à savoir où la brancher dans votre business.
+        </p>
+      </div>
+    </div>
+
+    <ol class="grid md:grid-cols-3 gap-6 md:gap-8">
+      {pillars.map((p) => (
+        <li class="border-t border-ink pt-6">
+          <p class="font-mono text-sm text-accent mb-6">{p.step}</p>
+          <h3 class="text-2xl md:text-3xl mb-4">{p.title}</h3>
+          <p class="text-ink-secondary leading-relaxed">{p.body}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-8 md:p-10 rounded-2xl bg-elevated border border-border">
+      <div class="max-w-xl">
+        <p class="eyebrow mb-3">Pas sûr que ce soit pour vous&nbsp;?</p>
+        <p class="text-lg text-ink">
+          On fait 30 minutes ensemble. Si je ne peux rien faire pour vous, je vous le dis.
+        </p>
+      </div>
+      <a href={site.cal.url} target="_blank" rel="noopener" class="btn-primary shrink-0">
+        {site.cal.label}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>

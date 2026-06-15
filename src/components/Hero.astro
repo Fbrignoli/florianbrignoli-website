@@ -1,0 +1,39 @@
+---
+import { site } from "../lib/config";
+---
+
+<section class="relative overflow-hidden pt-20 pb-28 md:pt-32 md:pb-40">
+  <div class="container-wide relative">
+    <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-center">
+      <div class="md:col-span-8">
+        <h1 class="text-[2.75rem] md:text-[5.5rem] mb-10 leading-[1.02]">
+          Mettre l'<span class="italic text-accent">IA</span> au service de votre business.
+        </h1>
+
+        <p class="text-xl md:text-2xl text-ink-secondary max-w-2xl leading-snug mb-12 font-light">
+          J'aide les dirigeants de PME et les freelances à intégrer l'IA dans leur quotidien.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href={site.cal.url} target="_blank" rel="noopener" class="btn-primary">
+            {site.cal.label}
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="#approche" class="btn-secondary">
+            Voir l'approche
+          </a>
+        </div>
+      </div>
+
+      <div class="md:col-span-4 flex md:justify-end">
+        <img
+          src="/img/florian.png"
+          alt="Florian Brignoli"
+          width="320"
+          height="320"
+          class="w-48 h-48 md:w-72 md:h-72 rounded-full object-cover border border-border shadow-lg"
+        />
+      </div>
+    </div>
+  </div>
+</section>

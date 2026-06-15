@@ -1,0 +1,71 @@
+---
+import { site, leadMagnets } from "../lib/config";
+---
+
+<section id="ressources" class="py-24 md:py-32 border-t border-border">
+  <div class="container-wide">
+    <div class="mb-14">
+      <p class="eyebrow mb-4">03 · Outils</p>
+      <h2 class="text-4xl md:text-6xl max-w-3xl">
+        Des outils à télécharger <span class="italic text-accent">gratuitement</span>.
+      </h2>
+      <p class="text-lg text-ink-secondary max-w-2xl mt-6">
+        Chaque vidéo a son outil : un prompt, un workflow ou un template prêt à l'emploi.
+      </p>
+    </div>
+
+    {leadMagnets.length === 0 ? (
+      <div class="rounded-2xl border border-dashed border-border-strong p-12 text-center text-ink-muted mb-16">
+        Les outils apparaîtront ici à mesure que les vidéos sortent.
+      </div>
+    ) : (
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+        {leadMagnets.map((lm, i) => (
+          <li>
+            <a
+              href={lm.href}
+              target="_blank"
+              rel="noopener"
+              class="group block rounded-2xl border border-border bg-surface p-7 hover:border-ink transition-colors"
+            >
+              <p class="eyebrow mb-3">
+                {String(i + 1).padStart(2, "0")} · {lm.videoTitle}
+              </p>
+              <h3 class="text-2xl mb-2 group-hover:text-accent transition-colors">
+                {lm.title}
+              </h3>
+              <p class="text-ink-secondary">{lm.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <div class="rounded-3xl bg-ink text-bg p-10 md:p-16 relative overflow-hidden">
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute -bottom-32 -left-20 font-display italic opacity-10 text-accent-bright"
+        style="font-size: 28rem; line-height: 0.8;"
+      >
+        F
+      </div>
+      <div class="relative max-w-2xl">
+        <p class="font-mono text-xs uppercase tracking-wider opacity-60 mb-6">
+          On en parle&nbsp;?
+        </p>
+        <h3 class="text-3xl md:text-5xl mb-10 leading-tight text-bg">
+          30 minutes pour voir si je peux <span class="italic text-accent-bright">vous aider</span>.
+        </h3>
+        <a
+          href={site.cal.url}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-bg text-ink hover:bg-accent-bright hover:text-bg transition-colors font-medium"
+        >
+          {site.cal.label}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

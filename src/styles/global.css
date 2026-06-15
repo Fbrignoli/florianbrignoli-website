@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  /* Direction A — Encre & bleu Amplixy (fond froid) */
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-elevated: #eaeef3;
+
+  --color-ink: #0b1018;
+  --color-ink-secondary: #3d4756;
+  --color-ink-tertiary: #5b6573;
+  --color-ink-muted: #7a8392;
+
+  --color-border: #e1e6ec;
+  --color-border-strong: #c8cfd8;
+
+  --color-accent: #3d5a80;
+  --color-accent-hover: #2e4663;
+  --color-accent-soft: #3d5a800f;
+  --color-accent-bright: #6b8bb8;
+  --color-accent-deep: #0a1128;
+
+  --font-display: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --container-narrow: 64rem;
+  --container-wide: 76rem;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+    font-weight: 400;
+    color: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+}
+
+@utility container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@utility container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  font-weight: 500;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #0b1018;
+  color: #f5f7fa;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  font-family: var(--font-sans);
+  transition: background-color 150ms;
+}
+.btn-primary:hover {
+  background-color: #3d5a80;
+  color: #f5f7fa;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #c8cfd8;
+  background-color: transparent;
+  color: #0b1018;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  font-family: var(--font-sans);
+  transition: border-color 150ms, color 150ms;
+}
+.btn-secondary:hover {
+  border-color: #0b1018;
+  color: #3d5a80;
+}
