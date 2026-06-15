@@ -18,15 +18,6 @@ export const site = {
   ],
 };
 
-export type LeadMagnet = {
-  title: string;
-  description: string;
-  videoTitle: string;
-  href: string;
-};
-
-export const leadMagnets: LeadMagnet[] = [];
-
 export type Pillar = {
   step: string;
   title: string;

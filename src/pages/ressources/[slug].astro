@@ -1,0 +1,145 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  const ressources = await getCollection("ressources");
+  return ressources.map((r) => ({
+    params: { slug: r.id },
+    props: { ressource: r },
+  }));
+}
+
+const { ressource } = Astro.props;
+const { Content } = await render(ressource);
+const {
+  titre,
+  promesse,
+  sous_titre,
+  pdf,
+  bullets,
+  video_titre,
+  mailerlite_form_id,
+  mailerlite_account_id,
+  seo_description,
+} = ressource.data;
+
+const formAction = `https://assets.mailerlite.com/jsonp/${mailerlite_account_id}/forms/${mailerlite_form_id}/subscribe`;
+---
+
+<Layout
+  title={`${titre} — Florian Brignoli`}
+  description={seo_description || promesse}
+>
+  <Nav />
+  <main class="pt-12 pb-24 md:pt-20 md:pb-32">
+    <article class="container-narrow">
+      {video_titre && (
+        <p class="eyebrow mb-6">Compagnon vidéo · {video_titre}</p>
+      )}
+
+      <h1 class="text-[2.5rem] md:text-[4.5rem] mb-8 leading-[1.05]">
+        {titre}
+      </h1>
+
+      <p class="text-xl md:text-2xl text-ink-secondary mb-4 font-light leading-snug">
+        {promesse}
+      </p>
+
+      {sous_titre && (
+        <p class="text-base text-ink-muted mb-12">{sous_titre}</p>
+      )}
+
+      <div class="rounded-2xl border border-border bg-surface p-8 md:p-10 mb-10">
+        <p class="eyebrow mb-5">Dans le PDF</p>
+        <ul class="space-y-3">
+          {bullets.map((b) => (
+            <li class="flex items-start gap-3 text-ink-secondary">
+              <span class="text-accent font-medium mt-0.5 shrink-0">→</span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="rounded-2xl border border-border bg-surface p-8 md:p-10">
+        <h2 class="text-2xl md:text-3xl mb-2">Reçois le PDF par email</h2>
+        <p class="text-ink-secondary mb-6">
+          Tu reçois un email de confirmation, tu cliques, le PDF arrive juste après.
+        </p>
+
+        <form
+          id="ml-form"
+          class="flex flex-col sm:flex-row gap-3 mb-3"
+          action={formAction}
+          method="post"
+          data-pdf={pdf}
+        >
+          <input
+            type="email"
+            name="fields[email]"
+            required
+            placeholder="ton@email.fr"
+            autocomplete="email"
+            class="flex-1 px-4 py-3 rounded-lg border border-border bg-bg text-ink focus:outline-none focus:border-accent transition-colors"
+          />
+          <button type="submit" class="btn-primary">
+            Recevoir le PDF
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div id="ml-message" class="hidden text-sm mt-3"></div>
+
+        <p class="text-xs text-ink-muted mt-4 leading-relaxed">
+          En t'inscrivant, tu rejoins aussi la newsletter (skills IA, retours d'expérience). Désinscription en 1 clic.
+        </p>
+      </div>
+
+      <div class="mt-16 prose prose-sm text-ink-tertiary max-w-2xl">
+        <Content />
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById("ml-form") as HTMLFormElement;
+  const msg = document.getElementById("ml-message") as HTMLDivElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector("button[type='submit']") as HTMLButtonElement;
+    const originalLabel = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = "Envoi…";
+    msg.className = "hidden text-sm mt-3";
+
+    try {
+      const fd = new FormData(form);
+      const params = new URLSearchParams();
+      fd.forEach((v, k) => params.append(k, String(v)));
+
+      await fetch(form.action, {
+        method: "POST",
+        mode: "no-cors",
+        body: params,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+
+      msg.textContent =
+        "Parfait. Vérifie ton email pour confirmer l'inscription, le PDF arrive juste après.";
+      msg.className = "text-sm mt-3 text-accent font-medium";
+      form.reset();
+      btn.textContent = "Envoyé ✓";
+    } catch (err) {
+      msg.textContent = "Oups, une erreur. Réessaie dans un instant.";
+      msg.className = "text-sm mt-3 text-red-600";
+      btn.disabled = false;
+      btn.innerHTML = originalLabel;
+    }
+  });
+</script>
