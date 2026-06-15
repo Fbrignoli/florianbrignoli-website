@@ -1,0 +1,16 @@
+name: rebuild-6h
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Coolify redeploy
+        run: |
+          curl -sf -X POST \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
+            "https://panel.amplixy.cloud/api/v1/deploy?uuid=w7oox4q68gj8j1hosbtshv9j&force=false"
