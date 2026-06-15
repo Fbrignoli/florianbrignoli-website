@@ -1,6 +1,6 @@
 ---
 titre: "Le vault personnel pour Claude Code et Codex"
-promesse: "L'arborescence et les prompts pour qu'un vault personnel serve de mémoire à Claude et Codex. Pas d'app, pas de wrapper."
+promesse: "L'arborescence et les prompts pour qu'un vault personnel serve de mémoire à Claude et Codex."
 sous_titre: "Le PDF accompagne la vidéo « Claude Code t'enferme »."
 pdf: "claude-code-tenferme.pdf"
 bullets:
