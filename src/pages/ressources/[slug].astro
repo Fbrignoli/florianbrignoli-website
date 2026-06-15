@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
@@ -13,7 +13,6 @@ export async function getStaticPaths() {
 }
 
 const { ressource } = Astro.props;
-const { Content } = await render(ressource);
 const {
   titre,
   promesse,
@@ -67,7 +66,7 @@ const formAction = `https://assets.mailerlite.com/jsonp/${mailerlite_account_id}
       <div class="rounded-2xl border border-border bg-surface p-8 md:p-10">
         <h2 class="text-2xl md:text-3xl mb-2">Reçois le PDF par email</h2>
         <p class="text-ink-secondary mb-6">
-          Ton email, et le PDF arrive dans la foulée.
+          Saisis ton email pour recevoir le PDF.
         </p>
 
         <form
@@ -94,13 +93,10 @@ const formAction = `https://assets.mailerlite.com/jsonp/${mailerlite_account_id}
         <div id="ml-message" class="hidden text-sm mt-3"></div>
 
         <p class="text-xs text-ink-muted mt-4 leading-relaxed">
-          En t'inscrivant, tu rejoins aussi la newsletter (skills IA, retours d'expérience). Désinscription en 1 clic.
+          Tu rejoins aussi la newsletter (skills IA, retours d'expérience). Désinscription à tout moment.
         </p>
       </div>
 
-      <div class="mt-16 prose prose-sm text-ink-tertiary max-w-2xl">
-        <Content />
-      </div>
     </article>
   </main>
   <Footer />
@@ -130,12 +126,12 @@ const formAction = `https://assets.mailerlite.com/jsonp/${mailerlite_account_id}
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      msg.textContent = "Parfait. Le PDF arrive par email dans la foulée.";
+      msg.textContent = "Inscription enregistrée. Le PDF arrive par email.";
       msg.className = "text-sm mt-3 text-accent font-medium";
       form.reset();
-      btn.textContent = "Envoyé ✓";
+      btn.textContent = "Envoyé";
     } catch (err) {
-      msg.textContent = "Oups, une erreur. Réessaie dans un instant.";
+      msg.textContent = "Erreur de connexion. Réessaie.";
       msg.className = "text-sm mt-3 text-red-600";
       btn.disabled = false;
       btn.innerHTML = originalLabel;
