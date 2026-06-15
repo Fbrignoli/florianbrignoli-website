@@ -67,7 +67,7 @@ const formAction = `https://assets.mailerlite.com/jsonp/${mailerlite_account_id}
       <div class="rounded-2xl border border-border bg-surface p-8 md:p-10">
         <h2 class="text-2xl md:text-3xl mb-2">Reçois le PDF par email</h2>
         <p class="text-ink-secondary mb-6">
-          Tu reçois un email de confirmation, tu cliques, le PDF arrive juste après.
+          Ton email, et le PDF arrive dans la foulée.
         </p>
 
         <form
@@ -130,8 +130,7 @@ const formAction = `https://assets.mailerlite.com/jsonp/${mailerlite_account_id}
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      msg.textContent =
-        "Parfait. Vérifie ton email pour confirmer l'inscription, le PDF arrive juste après.";
+      msg.textContent = "Parfait. Le PDF arrive par email dans la foulée.";
       msg.className = "text-sm mt-3 text-accent font-medium";
       form.reset();
       btn.textContent = "Envoyé ✓";
